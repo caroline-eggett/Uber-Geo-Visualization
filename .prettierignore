@@ -1,9 +1,0 @@
-workers/
-**/dist*/**/*
-dist.js
-*.min.js
-**/mapbox-gl-dev.js
-**/mapbox-gl.js
-*.md
-
-modules/core/src/controllers/controller.ts

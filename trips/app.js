@@ -35,7 +35,7 @@ const material = {
 };
 
 const DEFAULT_THEME = {
-  buildingColor: [252, 119, 70],
+  buildingColor: [255, 90, 95],
   trailColor0: [39, 110, 241],
   trailColor1: [212, 67, 51],
   material,

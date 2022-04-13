@@ -8,8 +8,17 @@ import { PolygonLayer } from "@deck.gl/layers";
 import { TripsLayer } from "@deck.gl/geo-layers";
 
 // Source data CSV
+/* 
 const DATA_URL = {
-  BUILDINGS: "buildings.json", // eslint-disable-line
+  BUILDINGS: "buildings.json", // eslint-disable-line// "taxi1.json",
+  TRIPS: "taxi1.json",
+  //  "https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/trips/trips-v7.json", // eslint-disable-line
+};
+*/
+
+const DATA_URL = {
+  BUILDINGS:
+    "https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/trips/buildings.json", // eslint-disable-line
   TRIPS:
     "https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/trips/trips-v7.json", // eslint-disable-line
 };
@@ -104,7 +113,7 @@ export default function App({
       getPath: (d) => d.path,
       getTimestamps: (d) => d.timestamps,
       getColor: (d) => (d.vendor === 0 ? theme.trailColor0 : theme.trailColor1),
-      opacity: 0.3,
+      opacity: 1,
       widthMinPixels: 2,
       rounded: true,
       trailLength,
@@ -117,7 +126,7 @@ export default function App({
       data: buildings,
       extruded: true,
       wireframe: false,
-      opacity: 0.5,
+      opacity: 0.1,
       getPolygon: (f) => f.polygon,
       getElevation: (f) => f.height,
       getFillColor: theme.buildingColor,

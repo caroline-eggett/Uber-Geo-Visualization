@@ -46,8 +46,9 @@ const material = {
 
 const DEFAULT_THEME = {
   buildingColor: [255, 90, 95],
-  trailColor0: [0, 0, 0],
-  trailColor1: [0, 0, 0],
+  trailColor0: [0, 166, 158],
+  trailColor1: [252, 100, 45],
+  trailColor2: [72, 72, 72],
   material,
   effects: [lightingEffect],
 };
@@ -83,7 +84,7 @@ export default function App({
   initialViewState = INITIAL_VIEW_STATE,
   mapStyle = MAP_STYLE,
   theme = DEFAULT_THEME,
-  loopLength = 5000, // unit corresponds to the timestamp in source data
+  loopLength = 1800, // unit corresponds to the timestamp in source data
   animationSpeed = 1,
 }) {
   const [time, setTime] = useState(0);
@@ -113,9 +114,13 @@ export default function App({
       data: trips,
       getPath: (d) => d.path,
       getTimestamps: (d) => d.timestamps,
-      getColor: (d) => (d.vendor === 0 ? theme.trailColor0 : theme.trailColor1),
+      getColor: (d) => {
+        if (d.vendor === 0) return theme.trailColor0;
+        if (d.vendor === 1) return theme.trailColor1;
+        if (d.vendor === 2) return theme.trailColor2;
+      },
       opacity: 1,
-      widthMinPixels: 2,
+      widthMinPixels: 4,
       rounded: true,
       trailLength,
       currentTime: time,

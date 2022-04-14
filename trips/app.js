@@ -8,20 +8,21 @@ import { PolygonLayer } from "@deck.gl/layers";
 import { TripsLayer } from "@deck.gl/geo-layers";
 
 // Source data CSV
-/* 
-const DATA_URL = {
-  BUILDINGS: "buildings.json", // eslint-disable-line// "taxi1.json",
-  TRIPS: "taxi1.json",
-  //  "https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/trips/trips-v7.json", // eslint-disable-line
-};
-*/
 
 const DATA_URL = {
-  BUILDINGS:
-    "https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/trips/buildings.json", // eslint-disable-line
-  TRIPS:
-    "https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/trips/trips-v7.json", // eslint-disable-line
+  // https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/trips/buildings.json
+  BUILDINGS: "buildings.json", // eslint-disable-line// "taxi1.json",
+
+  TRIPS: "taxis.json",
+  // "https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/trips/trips-v7.json", // eslint-disable-line
 };
+
+// const DATA_URL = {
+//   BUILDINGS:
+//     "https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/trips/buildings.json", // eslint-disable-line
+//   TRIPS:
+//     "https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/trips/trips-v7.json", // eslint-disable-line
+// };
 
 const ambientLight = new AmbientLight({
   color: [255, 255, 255],
@@ -30,23 +31,23 @@ const ambientLight = new AmbientLight({
 
 const pointLight = new PointLight({
   color: [255, 255, 255],
-  intensity: 2.0,
-  position: [-74.05, 40.7, 8000],
+  intensity: 0.5,
+  position: [-122.3, 37.6, 8000],
 });
 
 const lightingEffect = new LightingEffect({ ambientLight, pointLight });
 
 const material = {
-  ambient: 0.4,
-  diffuse: 0.6,
+  ambient: 0.6,
+  diffuse: 1,
   shininess: 32,
   specularColor: [255, 155, 96],
 };
 
 const DEFAULT_THEME = {
   buildingColor: [255, 90, 95],
-  trailColor0: [39, 110, 241],
-  trailColor1: [212, 67, 51],
+  trailColor0: [0, 0, 0],
+  trailColor1: [0, 0, 0],
   material,
   effects: [lightingEffect],
 };
@@ -63,7 +64,7 @@ const INITIAL_VIEW_STATE = {
 
 // Change the map layout to gray
 const MAP_STYLE =
-  "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json";
+  "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json";
 
 // This will need to be fixed.
 const landCover = [
@@ -78,11 +79,11 @@ const landCover = [
 export default function App({
   buildings = DATA_URL.BUILDINGS,
   trips = DATA_URL.TRIPS,
-  trailLength = 180,
+  trailLength = 10,
   initialViewState = INITIAL_VIEW_STATE,
   mapStyle = MAP_STYLE,
   theme = DEFAULT_THEME,
-  loopLength = 1800, // unit corresponds to the timestamp in source data
+  loopLength = 5000, // unit corresponds to the timestamp in source data
   animationSpeed = 1,
 }) {
   const [time, setTime] = useState(0);
@@ -118,7 +119,6 @@ export default function App({
       rounded: true,
       trailLength,
       currentTime: time,
-
       shadowEnabled: false,
     }),
     new PolygonLayer({
@@ -126,7 +126,7 @@ export default function App({
       data: buildings,
       extruded: true,
       wireframe: false,
-      opacity: 0.1,
+      opacity: 0.5,
       getPolygon: (f) => f.polygon,
       getElevation: (f) => f.height,
       getFillColor: theme.buildingColor,

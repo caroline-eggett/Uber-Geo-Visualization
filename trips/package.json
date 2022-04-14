@@ -5,7 +5,8 @@
   "scripts": {
     "start-local": "webpack-dev-server --env.local --progress --hot --open",
     "start": "webpack-dev-server --progress --hot --open",
-    "build": "webpack"
+    "build": "webpack && npm run copy",
+    "copy": "cp index.html dist/index.html && cp buildings.json dist/buildings.json && cp taxis.json dist/taxis.json"
   },
   "dependencies": {
     "deck.gl": "^8.7.0-beta.6",

@@ -80,11 +80,11 @@ const landCover = [
 export default function App({
   buildings = DATA_URL.BUILDINGS,
   trips = DATA_URL.TRIPS,
-  trailLength = 10,
+  trailLength = 25,
   initialViewState = INITIAL_VIEW_STATE,
   mapStyle = MAP_STYLE,
   theme = DEFAULT_THEME,
-  loopLength = 1800, // unit corresponds to the timestamp in source data
+  loopLength = 5000, // unit corresponds to the timestamp in source data
   animationSpeed = 1,
 }) {
   const [time, setTime] = useState(0);
@@ -120,8 +120,8 @@ export default function App({
         if (d.vendor === 2) return theme.trailColor2;
       },
       opacity: 1,
-      widthMinPixels: 4,
-      rounded: true,
+      widthMinPixels: 3,
+      rounded: false,
       trailLength,
       currentTime: time,
       shadowEnabled: false,
